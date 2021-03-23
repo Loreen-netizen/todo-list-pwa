@@ -43,7 +43,7 @@ const Edit = (props) => {
           value={name}
         />
 
-        <StyledButton href="#/" variant="contained" type="submit" size="large">
+        <StyledButton href="/" variant="contained" type="submit" size="large">
           Cancel
         </StyledButton>
 

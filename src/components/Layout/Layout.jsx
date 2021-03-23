@@ -62,13 +62,13 @@ const Layout = (props) => {
         <nav>
           <List>
             <LinkWrap>
-              <Link fullWidth disabled={activePage === "home"} url="#/">
+              <Link fullWidth disabled={activePage === "home"} url="/">
                Back To Home
               </Link>
             </LinkWrap>
 
             <LinkWrap>
-              <Link fullWidth disabled={activePage === "add"} url="#/add">
+              <Link fullWidth disabled={activePage === "add"} url="/add">
                 Add new item
               </Link>
             </LinkWrap>

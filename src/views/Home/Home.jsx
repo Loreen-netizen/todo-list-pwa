@@ -35,7 +35,7 @@ const handleDeleteItem = () => onDeleteItem(id);
       <Checkbox checked={checked} onChange={handleOnCheckToggle}/>
       <Name>{name}</Name>
       <div>
-        <IconButton href={`#/edit/${id}`}>
+        <IconButton href={`/edit/${id}`}>
           <Edit />
         </IconButton>
         <IconButton onClick ={handleDeleteItem}>

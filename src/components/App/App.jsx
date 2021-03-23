@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { v4 as createId } from "uuid";
-import { HashRouter, Switch, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useParams } from "react-router-dom";
 
 import Home from "../../views/Home/Home";
 import Add from "../../views/Add/Add";
@@ -37,7 +37,7 @@ const App = () => {
 
   const handleAddItem = (name) => {
     setList([{ id: createId(), name, checked: false }, ...list]);
-    window.location.replace("#/");
+    window.location.replace("/");
   };
 
   const handleCheckToggle = (taskId) => {
@@ -67,10 +67,10 @@ const App = () => {
       };
     });
     setList(newList);
-    window.location.replace("#/");
+    window.location.replace("/");
   };
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Switch>
         <Route
           path="/edit/:taskId"
@@ -88,7 +88,7 @@ const App = () => {
           }
         />
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 export default App;
