@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "../Link/Link";
+import { Button } from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
 
 const Header = styled.header`
   background: #b5179e;
   color: white;
   text-align: center;
-  padding: 0.1em;
+  padding: 0.1em 1rem;
   border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Title = styled.h1`
@@ -48,12 +52,24 @@ const PAGE_TITLE_MAP = {
   edit: "Editing Item",
 };
 
+const StyledButton = styled(Button)`
+  && {
+    color: white;
+  }
+`;
+
 const Layout = (props) => {
-  const { children, activePage } = props;
+  const { children, activePage, userName, onLogIn, onUserClick } = props;
   return (
     <>
       <Header>
         <Title>{PAGE_TITLE_MAP[activePage]}</Title>
+        <StyledButton
+          onClick={userName ? onUserClick : onLogIn}
+          startIcon={userName ? <AccountCircle /> : undefined}
+        >
+          {userName || "Log In"}
+        </StyledButton>
       </Header>
 
       {children}
@@ -63,7 +79,7 @@ const Layout = (props) => {
           <List>
             <LinkWrap>
               <Link fullWidth disabled={activePage === "home"} url="/">
-               Back To Home
+                Back To Home
               </Link>
             </LinkWrap>
 

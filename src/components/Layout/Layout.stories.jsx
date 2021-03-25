@@ -7,14 +7,24 @@ const config = {
 };
 
 export default config;
-const PLACEHOLDER_TEXT = `
-  
-  `;
+
+const MOCK_ACTIONS={
+  onLogIn:()=> console.log("onLogIn"),
+  onUserClick:()=> console.log("onUserClick"),
+}
 
 const Home = () => {
   return (
     <Global>
-      <Layout activePage="home">{faker.lorem.paragraphs(5)}</Layout>
+      <Layout activePage="home" {...MOCK_ACTIONS}>{faker.lorem.paragraphs(5)}</Layout>
+    </Global>
+  );
+};
+
+const LoggedIn = () => {
+  return (
+    <Global>
+      <Layout activePage="home" {...MOCK_ACTIONS} userName="John Smith">{faker.lorem.paragraphs(5)}</Layout>
     </Global>
   );
 };
@@ -22,7 +32,7 @@ const Home = () => {
 const Add = () => {
     return(
   <Global>
-    return <Layout activePage="add">{faker.lorem.paragraphs(5)}</Layout>
+    return <Layout activePage="add" {...MOCK_ACTIONS}>{faker.lorem.paragraphs(5)}</Layout>
   </Global>
     );
 };
@@ -35,4 +45,4 @@ const Edit = () => {
     );
 };
 
-export { Home, Add, Edit};
+export { Home, Add, Edit, LoggedIn};

@@ -25,20 +25,19 @@ const Name = styled.h2`
 `;
 
 const Task = (props) => {
-  const { id, name, checked, onCheckToggle, onDeleteItem  } = props;
+  const { id, name, checked, onCheckToggle, onDeleteItem } = props;
   const handleOnCheckToggle = () => onCheckToggle(id);
-const handleDeleteItem = () => onDeleteItem(id);
+  const handleDeleteItem = () => onDeleteItem(id);
 
   return (
-
     <Item>
-      <Checkbox checked={checked} onChange={handleOnCheckToggle}/>
+      <Checkbox checked={checked} onChange={handleOnCheckToggle} />
       <Name>{name}</Name>
       <div>
         <IconButton href={`/edit/${id}`}>
           <Edit />
         </IconButton>
-        <IconButton onClick ={handleDeleteItem}>
+        <IconButton onClick={handleDeleteItem}>
           <Delete />
         </IconButton>
       </div>
@@ -47,9 +46,21 @@ const handleDeleteItem = () => onDeleteItem(id);
 };
 
 const Home = (props) => {
-  const { list, onCheckToggle, onDeleteItem } = props;
+  const {
+    list,
+    onCheckToggle,
+    onDeleteItem,
+    userName,
+    OnLogIn,
+    onUserClick,
+  } = props;
   return (
-    <Layout activePage="home">
+    <Layout
+      activePage="home"
+      userName={userName}
+      OnLogIn={OnLogIn}
+      onUserClick={onUserClick}
+    >
       {list.map(({ id, name, checked }) => (
         <Task
           key={id}
@@ -60,9 +71,7 @@ const Home = (props) => {
           onDeleteItem={onDeleteItem}
         />
       ))}
-      <List>
-        
-      </List>
+      <List></List>
     </Layout>
   );
 };

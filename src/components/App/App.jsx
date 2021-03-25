@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as createId } from "uuid";
 import { BrowserRouter, Switch, Route, useParams } from "react-router-dom";
+import identity from "netlify-identity-widget";
 
 import Home from "../../views/Home/Home";
 import Add from "../../views/Add/Add";
@@ -9,7 +10,10 @@ import Edit from "../../views/Edit/Edit";
 const EditWrapper = (props) => {
   const { list, ...remainingProps } = props;
   const { taskId } = useParams();
-
+  console.log({ list });
+  if (list.length < 1) {
+    return <div>Loading....</div>;
+  }
   const { name } = list.find((item) => item.id === taskId);
 
   return <Edit {...remainingProps} taskId={taskId} initialName={name} />;
@@ -19,6 +23,8 @@ const App = () => {
   const [loaded, setLoaded] = useState(false);
   const [list, setList] = useState([]);
 
+  const userObj = identity.currentUser();
+
   useEffect(() => {
     const listAsString = window.localStorage.getItem("list");
 
@@ -27,6 +33,12 @@ const App = () => {
     }
 
     setLoaded(true);
+
+    identity.init();
+    const userObj = identity.currentUser();
+    if (!userObj) {
+      identity.open();
+    }
   }, []);
 
   useEffect(() => {
@@ -69,14 +81,33 @@ const App = () => {
     setList(newList);
     window.location.replace("/");
   };
+  
   return (
     <BrowserRouter>
       <Switch>
         <Route
           path="/edit/:taskId"
-          children={<EditWrapper list={list} onSave={handleEditItem} />}
+          children={
+            <EditWrapper
+              list={list}
+              onSave={handleEditItem}
+              userName={null}
+              OnLogIn={console.log}
+              onUserClick={console.log}
+            />
+          }
         />
-        <Route path="/add/" children={<Add onSave={handleAddItem} />} />
+        <Route
+          path="/add/"
+          children={
+            <Add
+              onSave={handleAddItem}
+              userName={null}
+              OnLogIn={console.log}
+              onUserClick={console.log}
+            />
+          }
+        />
         <Route
           path="/"
           children={
@@ -84,6 +115,9 @@ const App = () => {
               list={list}
               onCheckToggle={handleCheckToggle}
               onDeleteItem={handleDeleteItem}
+              userName={null}
+              OnLogIn={console.log}
+              onUserClick={console.log}
             />
           }
         />

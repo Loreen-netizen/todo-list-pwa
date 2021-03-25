@@ -17,7 +17,7 @@ const StyledButton = styled(Button)`
 `;
 
 const Add = (props) => {
-  const { onSave } = props;
+  const { onSave, userName, OnLogIn, onUserClick } = props;
   const [name, setName] = useState("");
 
   const handleTextChange = (event) => {
